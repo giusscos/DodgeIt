@@ -14,6 +14,8 @@ class Ground: SKSpriteNode {
         let groundSize = CGSize(width: size.width, height: 40)
         
         super.init(texture: nil, color: .brown, size: groundSize)
+        
+        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -22,5 +24,8 @@ class Ground: SKSpriteNode {
     
     // MARK - setup
     
-    func setup() {}
+    func setup() {
+        physicsBody = SKPhysicsBody(rectangleOf: size)
+        physicsBody!.isDynamic = false
+    }
 }
