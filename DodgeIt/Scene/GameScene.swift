@@ -9,15 +9,14 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
+    let player: Player
+    let ground: Ground
     
-    let box: SKSpriteNode
-    let ground: SKSpriteNode
     
     // MARK - init
-    
     override init(size: CGSize) {
-        box = SKSpriteNode(color: .red, size: CGSize(width: 40, height: 60))
-        ground = SKSpriteNode(color: .brown, size: CGSize(width: size.width, height: 40))
+        player = Player()
+        ground = Ground(size: size)
         
         super.init(size: size)
         
@@ -32,8 +31,8 @@ class GameScene: SKScene {
     
     func setup() {
         // box node
-        box.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        addChild(box)
+        player.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        addChild(player)
                 
         // ground node
         ground.position = CGPoint(x: size.width / 2, y: ground.size.height / 2)
