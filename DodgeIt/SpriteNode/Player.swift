@@ -25,7 +25,13 @@ class Player: SKSpriteNode {
     // MARK: - setup
     
     func setup() {
+        name = "player"
         physicsBody = SKPhysicsBody(rectangleOf: size)
+
         physicsBody!.allowsRotation = false
+        
+        physicsBody!.categoryBitMask = PhysicsCategory.Player
+        physicsBody!.collisionBitMask = PhysicsCategory.Ground
+        physicsBody!.contactTestBitMask = PhysicsCategory.Coin
     }
 }

@@ -24,7 +24,13 @@ class Ground: SKSpriteNode {
     
     // MARK: - setup
     func setup() {
+        name = "ground"
         physicsBody = SKPhysicsBody(rectangleOf: size)
+        
         physicsBody!.isDynamic = false
+        
+        physicsBody!.categoryBitMask = PhysicsCategory.Ground
+        physicsBody!.collisionBitMask = PhysicsCategory.Player
+        physicsBody!.contactTestBitMask = PhysicsCategory.None
     }
 }

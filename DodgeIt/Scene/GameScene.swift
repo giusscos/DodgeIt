@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     let player: Player
     let cameraPlayer: SKCameraNode
     
@@ -34,6 +34,8 @@ class GameScene: SKScene {
     
     // MARK: - setup
     func setup() {
+        physicsWorld.contactDelegate = self
+        
         let centerPoint = CGPoint(x: size.width / 2, y: size.height / 2)
         
         // box node
@@ -83,7 +85,7 @@ class GameScene: SKScene {
             player.physicsBody?.applyForce(CGVector(dx: .zero, dy: 150))
         }
         
-        player.position.x += 60 * deltaTime
+        player.position.x += 200 * deltaTime
         
         camera?.position.x = player.position.x
         
@@ -96,8 +98,18 @@ class GameScene: SKScene {
             
             if dx < -(background.size.width + size.width / 2) {
                 background.position.x += background.size.width * 2
-                background.resetColor()
+                
+                background.resetBackground()
             }
+        }
+    }
+    
+    // MARK: - Physics Delegate
+    func didBegin(_ contact: SKPhysicsContact) {
+        let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        
+        if collision == PhysicsCategory.Coin | PhysicsCategory.Player {
+            print("** Collision detected! **")
         }
     }
 }

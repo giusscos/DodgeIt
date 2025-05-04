@@ -11,6 +11,8 @@ class Background: SKNode {
     let background: SKSpriteNode
     let size: CGSize
     
+    let contentNode: SKNode
+    
     let ground: Ground
     
     // MARK: - init
@@ -22,6 +24,8 @@ class Background: SKNode {
         background = SKSpriteNode(color: .clear, size: size)
         
         ground = Ground(size: size)
+        
+        contentNode = SKNode()
         
         super.init()
         
@@ -42,11 +46,23 @@ class Background: SKNode {
         addChild(ground)
         ground.position = CGPoint(x: size.width / 2, y: ground.size.height / 2)
         ground.zPosition = 1
+        
+        addChild(contentNode)
     }
     
     // MARK: - Helpers
-    func resetColor() {
+    func resetBackground() {
         background.color = generateRandomColor()
+        
+        contentNode.removeAllChildren()
+        
+        let coin = Coin()
+        contentNode.addChild(coin)
+        
+        coin.position = CGPoint(
+            x: CGFloat(arc4random() % UInt32(size.width)),
+            y: CGFloat(arc4random() % UInt32(size.height - ground.size.height))
+        )
     }
     
     func generateRandomColor() -> UIColor {
