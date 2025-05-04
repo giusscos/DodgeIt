@@ -26,5 +26,6 @@ class Player: SKSpriteNode {
     
     func setup() {
         physicsBody = SKPhysicsBody(rectangleOf: size)
+        physicsBody!.allowsRotation = false
     }
 }

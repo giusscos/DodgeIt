@@ -83,8 +83,7 @@ class GameScene: SKScene {
             player.physicsBody?.applyForce(CGVector(dx: .zero, dy: 150))
         }
         
-        player.position.x += 40 * deltaTime
-//        player.physicsBody?.applyForce(CGVector(dx: 30, dy: .zero))
+        player.position.x += 60 * deltaTime
         
         camera?.position.x = player.position.x
         
@@ -97,6 +96,7 @@ class GameScene: SKScene {
             
             if dx < -(background.size.width + size.width / 2) {
                 background.position.x += background.size.width * 2
+                background.resetColor()
             }
         }
     }

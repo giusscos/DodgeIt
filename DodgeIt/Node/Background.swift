@@ -17,9 +17,9 @@ class Background: SKNode {
     init(size: CGSize) {
         self.size = size
         
-        let hue = CGFloat(arc4random() % 1000) / 1000
-        let color = UIColor(hue: hue, saturation: 1, brightness: 1, alpha: 1)
-        background = SKSpriteNode(color: color, size: size)
+//        let hue = CGFloat(arc4random() % 1000) / 1000
+//        let color = UIColor(hue: hue, saturation: 1, brightness: 1, alpha: 1)
+        background = SKSpriteNode(color: .clear, size: size)
         
         ground = Ground(size: size)
         
@@ -36,10 +36,21 @@ class Background: SKNode {
     func setup() {
         addChild(background)
         background.anchorPoint = .zero
+        background.color = generateRandomColor()
         
         // ground node
         addChild(ground)
         ground.position = CGPoint(x: size.width / 2, y: ground.size.height / 2)
         ground.zPosition = 1
+    }
+    
+    // MARK: - Helpers
+    func resetColor() {
+        background.color = generateRandomColor()
+    }
+    
+    func generateRandomColor() -> UIColor {
+        let hue = CGFloat(arc4random() % 1000) / 1000
+        return UIColor(hue: hue, saturation: 1, brightness: 1, alpha: 1)
     }
 }
