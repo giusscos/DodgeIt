@@ -32,6 +32,6 @@ class Player: SKSpriteNode {
         
         physicsBody!.categoryBitMask = PhysicsCategory.Player
         physicsBody!.collisionBitMask = PhysicsCategory.Ground
-        physicsBody!.contactTestBitMask = PhysicsCategory.Coin
+        physicsBody!.contactTestBitMask = PhysicsCategory.Coin | PhysicsCategory.Deadly
     }
 }

@@ -12,4 +12,5 @@ struct PhysicsCategory {
     static let Player: UInt32 = 0b1     // 0001
     static let Ground: UInt32 = 0b10    // 0010
     static let Coin: UInt32 = 0b100     // 0100
+    static let Deadly: UInt32 = 0b1000  // 1000
 }

@@ -56,13 +56,30 @@ class Background: SKNode {
         
         contentNode.removeAllChildren()
         
-        let coin = Coin()
-        contentNode.addChild(coin)
+        let n = arc4random() % 2
         
-        coin.position = CGPoint(
-            x: CGFloat(arc4random() % UInt32(size.width)),
-            y: CGFloat(arc4random() % UInt32(size.height - ground.size.height))
-        )
+        switch n {
+        case 0:
+            let coin = Coin()
+            contentNode.addChild(coin)
+            
+            coin.position = CGPoint(
+                x: CGFloat(arc4random() % UInt32(size.width)),
+                y: CGFloat(arc4random() % UInt32(size.height - ground.size.height)) + 40
+            )
+        case 1:
+            let deadly = Deadly()
+            contentNode.addChild(deadly)
+            
+            deadly.position = CGPoint(
+                x: CGFloat(arc4random() % UInt32(size.width - deadly.size.width)) + deadly.size.width / 2,
+                y: CGFloat(arc4random() % UInt32(size.height - ground.size.height)) + 40
+            )
+        default:
+            break
+        }
+        
+        
     }
     
     func generateRandomColor() -> UIColor {

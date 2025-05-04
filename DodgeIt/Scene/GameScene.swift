@@ -110,6 +110,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if collision == PhysicsCategory.Coin | PhysicsCategory.Player {
             print("** Collision detected! **")
+        } else if collision == PhysicsCategory.Deadly | PhysicsCategory.Player {
+            print("** Game Over! **")
         }
     }
 }
