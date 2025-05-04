@@ -9,7 +9,7 @@ import SpriteKit
 
 class Ground: SKSpriteNode {
     
-    // MARK - init
+    // MARK: - init
     init(size: CGSize) {
         let groundSize = CGSize(width: size.width, height: 40)
         
@@ -22,8 +22,7 @@ class Ground: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK - setup
-    
+    // MARK: - setup
     func setup() {
         physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody!.isDynamic = false

@@ -9,7 +9,7 @@ import SpriteKit
 
 class Player: SKSpriteNode {
     
-    // MARK - init
+    // MARK: - init
     init () {
         let playerSize = CGSize(width: 30, height: 60)
         
@@ -22,7 +22,7 @@ class Player: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK - setup
+    // MARK: - setup
     
     func setup() {
         physicsBody = SKPhysicsBody(rectangleOf: size)

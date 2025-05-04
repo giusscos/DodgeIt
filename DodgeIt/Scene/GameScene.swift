@@ -10,15 +10,17 @@ import GameplayKit
 
 class GameScene: SKScene {
     let player: Player
-    let ground: Ground
     let cameraPlayer: SKCameraNode
+    
+    var backgrounds = [Background]()
     
     var touching: Bool = false
     
-    // MARK - init
+    var lastUpdateTime: CFTimeInterval = 0
+    
+    // MARK: - init
     override init(size: CGSize) {
         player = Player()
-        ground = Ground(size: size)
         cameraPlayer = SKCameraNode()
         
         super.init(size: size)
@@ -30,20 +32,26 @@ class GameScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK - setup
+    // MARK: - setup
     func setup() {
+        let centerPoint = CGPoint(x: size.width / 2, y: size.height / 2)
+        
         // box node
         addChild(player)
-        player.position = CGPoint(x: size.width / 2, y: size.height / 2)
-                
-        // ground node
-        addChild(ground)
-        ground.position = CGPoint(x: size.width / 2, y: ground.size.height / 2)
-        
+        player.position = centerPoint
+        player.zPosition = 99
+                        
         // cameraPlayer node
         addChild(cameraPlayer)
         camera = cameraPlayer
-        cameraPlayer.position = player.position
+        cameraPlayer.position = centerPoint
+            
+        for i in 0..<2 {
+            let background = Background(size: size)
+            background.position.x = CGFloat(i) * size.width
+            backgrounds.append(background)
+            addChild(background)
+        }
     }
     
     override func didMove(to view: SKView) {
@@ -61,15 +69,35 @@ class GameScene: SKScene {
         touching = false
     }
     
+    // MARK: - update
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
+    
+        var deltaTime = currentTime - lastUpdateTime
+        
+        if deltaTime > 1 {
+            deltaTime = 1 / 60
+        }
         
         if touching {
             player.physicsBody?.applyForce(CGVector(dx: .zero, dy: 150))
         }
-    
-        player.physicsBody?.applyForce(CGVector(dx: 30, dy: .zero))
+        
+        player.position.x += 40 * deltaTime
+//        player.physicsBody?.applyForce(CGVector(dx: 30, dy: .zero))
         
         camera?.position.x = player.position.x
+        
+        scrollBackgrounds()
+    }
+    
+    func scrollBackgrounds() {
+        for background in backgrounds {
+            let dx = background.position.x - cameraPlayer.position.x
+            
+            if dx < -(background.size.width + size.width / 2) {
+                background.position.x += background.size.width * 2
+            }
+        }
     }
 }
