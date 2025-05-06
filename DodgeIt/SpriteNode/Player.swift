@@ -11,9 +11,9 @@ class Player: SKSpriteNode {
     
     // MARK: - init
     init () {
-        let playerSize = CGSize(width: 30, height: 60)
+        let playerSize = CGSize(width: 40, height: 40)
         
-        super.init(texture: nil, color: .red, size: playerSize)
+        super.init(texture: nil, color: .gray, size: playerSize)
         
         setup()
     }

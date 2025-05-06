@@ -11,8 +11,9 @@ class Coin: SKSpriteNode {
     
     // MARK: init
     init() {
-        let size = 20
-        super.init(texture: nil, color: .yellow, size: CGSize(width: size, height: size))
+        let coinSize = CGSize(width: 30, height: 30)
+        
+        super.init(texture: nil, color: .yellow, size: coinSize)
         
         setup()
     }

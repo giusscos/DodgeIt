@@ -11,13 +11,9 @@ class Deadly: SKSpriteNode {
     
     // MARK: - init
     init() {
-//        let width = CGFloat(arc4random() % 4) * 20 + 20
-//        let height = CGFloat(arc4random() % 4) * 20 + 20
-        let width = 40
-        let height = 40
-        let size = CGSize(width: width, height: height)
+        let deadlyObjSize = CGSize(width: 30, height: 30)
         
-        super.init(texture: nil, color: .black, size: size)
+        super.init(texture: nil, color: .black, size: deadlyObjSize)
         
         setup()
     }

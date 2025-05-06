@@ -81,13 +81,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             deltaTime = 1 / 60
         }
         
-        if touching {
-            player.physicsBody?.applyForce(CGVector(dx: .zero, dy: 150))
+        let maxHeight = size.height - (player.size.height * 1.5)
+        
+        if touching && player.position.y < maxHeight  {
+            player.physicsBody!.applyForce(CGVector(dx: .zero, dy: 130))
+            
+            if player.position.y >= maxHeight {
+                player.position.y = maxHeight
+            }
         }
         
-        player.position.x += 200 * deltaTime
+        player.position.x += 130 * deltaTime
         
-        camera?.position.x = player.position.x
+        camera?.position.x = player.position.x + (size.width / 4)
         
         scrollBackgrounds()
     }
