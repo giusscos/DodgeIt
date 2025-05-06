@@ -25,6 +25,10 @@ class Ground: SKSpriteNode {
     // MARK: - setup
     func setup() {
         name = "ground"
+        
+        texture = groundTexture
+        texture!.filteringMode = .nearest
+        
         physicsBody = SKPhysicsBody(rectangleOf: size)
         
         physicsBody!.isDynamic = false
@@ -32,5 +36,14 @@ class Ground: SKSpriteNode {
         physicsBody!.categoryBitMask = PhysicsCategory.Ground
         physicsBody!.collisionBitMask = PhysicsCategory.Player
         physicsBody!.contactTestBitMask = PhysicsCategory.None
+    }
+    
+    // MARK: - textures
+    private var groundAtlas: SKTextureAtlas {
+        return SKTextureAtlas(named: "ground")
+    }
+    
+    private var groundTexture: SKTexture {
+        return groundAtlas.textureNamed("ground-1")
     }
 }

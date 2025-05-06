@@ -42,7 +42,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(player)
         player.position = centerPoint
         player.zPosition = 99
-                        
+        player.startWalkAnimation()
+    
         // cameraPlayer node
         addChild(cameraPlayer)
         camera = cameraPlayer
@@ -81,7 +82,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             deltaTime = 1 / 60
         }
         
-        let maxHeight = size.height - (player.size.height * 1.5)
+        let maxHeight = size.height - (player.size.height * 1.25)
         
         if touching && player.position.y < maxHeight  {
             player.physicsBody!.applyForce(CGVector(dx: .zero, dy: 130))
@@ -110,14 +111,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    // MARK: - Physics Delegate
+    // MARK: - physics delegate
     func didBegin(_ contact: SKPhysicsContact) {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         
         if collision == PhysicsCategory.Coin | PhysicsCategory.Player {
-            print("** Collision detected! **")
+            print("Coin detected!")
         } else if collision == PhysicsCategory.Deadly | PhysicsCategory.Player {
-            print("** Game Over! **")
+            print("Game Over!")
         }
     }
 }

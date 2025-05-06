@@ -20,8 +20,6 @@ class Background: SKNode {
     init(size: CGSize) {
         self.size = size
         
-//        let hue = CGFloat(arc4random() % 1000) / 1000
-//        let color = UIColor(hue: hue, saturation: 1, brightness: 1, alpha: 1)
         background = SKSpriteNode(color: .clear, size: size)
         
         ground = Ground(size: size)
@@ -51,7 +49,7 @@ class Background: SKNode {
         addChild(contentNode)
     }
     
-    // MARK: - Helpers
+    // MARK: - helpers
     func resetBackground() {
         background.color = generateRandomColor()
         
@@ -88,6 +86,7 @@ class Background: SKNode {
                 let coin = Coin()
                 contentNode.addChild(coin)
                 coin.position = position
+                coin.startIdleAnimation()
             case 1:
                 let deadly = Deadly()
                 contentNode.addChild(deadly)
@@ -110,6 +109,15 @@ class Background: SKNode {
     func generateRandomColor() -> UIColor {
         let hue = CGFloat(arc4random() % 1000) / 1000
         return UIColor(hue: hue, saturation: 1, brightness: 1, alpha: 1)
+    }
+    
+    // MARK: - textures
+    private var backgroundAtlas: SKTextureAtlas {
+        return SKTextureAtlas(named: "background")
+    }
+    
+    private var backgroundTexture: SKTexture {
+        return backgroundAtlas.textureNamed("background-blue-1")
     }
 }
 
